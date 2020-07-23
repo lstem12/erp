@@ -26,23 +26,67 @@ public class GradeDAOImpl implements GradeDAO {
 			ps.setString(2, grade.get("grd_name").toString());
 			ps.setString(3, grade.get("grd_desc").toString());
 			result = ps.executeUpdate();
-			con.commit();;
+			con.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				Conn.close(ps, con);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
 
 	@Override
 	public int updateGrade(Map<String, Object> grade) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = Conn.open();
+			String sql = "update grade set grd_name=?, grd_desc=? where grd_no=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, grade.get("grd_name").toString());
+			ps.setString(2, grade.get("grd_desc").toString());
+			ps.setInt(3, (int) grade.get("grd_no"));
+			result = ps.executeUpdate();
+			con.commit();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				Conn.close(ps, con);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public int deleteGrade(Map<String, Object> grade) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = Conn.open();
+			String sql = "delete from grade where grd_no=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, (int) grade.get("grd_no"));
+			result = ps.executeUpdate();
+			con.commit();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				Conn.close(ps, con);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -57,11 +101,11 @@ public class GradeDAOImpl implements GradeDAO {
 			ps.setInt(1, (int)grade.get("grd_no"));
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				Map<String,Object> map = new HashMap<>();
-				map.put("grd_no", rs.getInt("grd_no"));
-				map.put("grd_name", rs.getString("grd_name"));
-				map.put("grd_desc", rs.getString("grd_desc"));
-				return map;
+				Map<String,Object> rMap = new HashMap<>();
+				rMap.put("grd_no", rs.getInt("grd_no"));
+				rMap.put("grd_name", rs.getString("grd_name"));
+				rMap.put("grd_desc", rs.getString("grd_desc"));
+				return rMap;
 			}
 		}catch(Exception e) {
 			

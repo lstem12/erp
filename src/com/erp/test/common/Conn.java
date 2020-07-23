@@ -18,7 +18,9 @@ public class Conn {
 
 	public static Connection open() {
 		try {
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe","c##test","test");
+			Connection con = DriverManager.getConnection
+					("jdbc:oracle:thin:@localhost:1521/xe","c##test","test");
+			con.setAutoCommit(false);
 			return con;
 		} catch (SQLException e) {
 			e.printStackTrace();

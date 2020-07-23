@@ -21,7 +21,7 @@
 	<c:forEach items="${gradeList}" var="grade">
 		<tr>
 			<td>${grade.grd_no}</td>
-			<td><a href="/views/grade?grd_no=${grade.grd_no}">${grade.grd_name}</a></td>
+			<td><a href="/grade/grade-view?grd_no=${grade.grd_no}">${grade.grd_name}</a></td>
 			<td>${grade.grd_desc}</td>
 		</tr>
 	</c:forEach>
