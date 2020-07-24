@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static final String PREFIX="/WEB-INF";
+	private static final String SUFIX=".jsp";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF"+uri+".jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(PREFIX+uri+SUFIX);
 		rd.forward(request, response);
 	}
 
