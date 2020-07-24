@@ -46,7 +46,7 @@ public class EmployeeServlet extends HttpServlet {
 			Map<String,Object> rMap = employeeService.insertEmployee(map);
 			rMap.put("url", "/employee/employee-list");
 			request.setAttribute("rMap", rMap);
-			RequestDispatcher rd = request.getRequestDispatcher("/views/common/msg");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			rd.forward(request, response);
 		}else if("/employee/employee-update".equals(uri)) {
 			int empNo = Integer.parseInt(request.getParameter("emp_no"));
@@ -61,7 +61,7 @@ public class EmployeeServlet extends HttpServlet {
 			Map<String,Object> rMap = employeeService.updateEmployee(map);
 			rMap.put("url", "/employee/employee-list");
 			request.setAttribute("rMap", rMap);
-			RequestDispatcher rd = request.getRequestDispatcher("/views/common/msg");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			rd.forward(request, response);			
 		}else if("/employee/employee-delete".equals(uri)) {
 			int empNo = Integer.parseInt(request.getParameter("emp_no"));
