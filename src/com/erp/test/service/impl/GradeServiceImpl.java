@@ -44,7 +44,6 @@ public class GradeServiceImpl implements GradeService {
 
 	@Override
 	public List<Map<String, Object>> selectGradeList(Map<String, Object> grade) {
-
 		return gradeDAO.selectGradeList(grade);
 	}
 

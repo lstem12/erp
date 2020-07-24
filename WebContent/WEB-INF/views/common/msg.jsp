@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<script>
-		alert("${rMap.msg}");
-		location.href="/grade/grade-list";
-</script>
-
+	<script>
+		alert('${rMap.msg}');
+		location.href = '${rMap.url}';
+	</script>
 </body>
 </html>

@@ -27,7 +27,7 @@ public class GradeServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/views/grade/grade-list");
 			rd.forward(request, response);
 		}else if ("/grade/grade-view".equals(uri)) {
-			String grd_no = request.getParameter("grd_no");
+			String grd_no = request.getParameter("grdNo");
 			int grdNo = Integer.parseInt(grd_no);
 			Map<String,Object> map = new HashMap<>();
 			map.put("grd_no", grdNo);
@@ -55,26 +55,24 @@ public class GradeServlet extends HttpServlet {
 			grade.put("grd_no", grdNo);
 			grade.put("grd_name", grdName);
 			grade.put("grd_desc", grdDesc);
-			Map<String, Object> rMap = gradeService.insertGrade(grade);
-			if(rMap.get("msg").equals("직급 추가완료")) {
-				response.sendRedirect("/grade/grade-list");
-			}	
+			gradeService.insertGrade(grade);
+
+			
 		}else if ("/grade/grade-update".equals(uri)) {
 			Map<String, Object> grade = new HashMap<>();
 			grade.put("grd_no", grdNo);
 			grade.put("grd_name", grdName);
 			grade.put("grd_desc", grdDesc);
 			Map<String, Object> rMap = gradeService.updateGrade(grade);
-			if(rMap.get("msg").equals("직급 수정완료")) {
-				response.sendRedirect("/grade/grade-list");
-			}	
-		}else if ("/grade/grade-delete".equals(uri)) {
+			rMap.put("url", "/grade/grade-list");
+			request.setAttribute("rMap", rMap);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			rd.forward(request, response);
+		}
+		else if ("/grade/grade-delete".equals(uri)) {
 			Map<String, Object> grade = new HashMap<>();
-			grade.put("grd_no", Integer.parseInt(request.getParameter("grd_no")));
-			Map<String, Object> rMap = gradeService.deleteGrade(grade);
-			if(rMap.get("msg").equals("직급 삭제완료")) {
-				response.sendRedirect("/grade/grade-list");
-			}
+			grade.put("grd_no", grdNo);
+
 		}
 			
 	}

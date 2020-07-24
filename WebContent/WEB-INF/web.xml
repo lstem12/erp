@@ -26,7 +26,15 @@
 		<url-pattern>/grade/*</url-pattern>
 	</servlet-mapping>
 	
-	
+	<servlet>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<servlet-class>com.erp.test.servlet.EmployeeServlet</servlet-class>	
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<url-pattern>/employee/*</url-pattern>
+	</servlet-mapping>
+		
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
