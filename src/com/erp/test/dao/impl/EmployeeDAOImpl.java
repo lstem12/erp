@@ -138,8 +138,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		
 		try {
 			con = Conn.open();
-			String sql = "select e.*, g.grd_name\r\n" + 
-					"from employee e, grade g where e.grd_no=g.grd_no ORDER by e.emp_name";
+			String sql = "select e.emp_no,e.emp_name,e.emp_credat,e.emp_salary, g.grd_name, g.grd_no,\n" + 
+					"DECODE(e.emp_active, 1, '재직중', 0, '-퇴사-', 2, '<휴직중>') as emp_active\n" + 
+					"from employee e, grade g \n" + 
+					"where e.grd_no=g.grd_no \n" + 
+					"ORDER by e.emp_name";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
@@ -148,7 +151,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				map.put("emp_name", rs.getString("emp_name"));
 				map.put("emp_credat", rs.getString("emp_credat"));
 				map.put("emp_salary", rs.getInt("emp_salary"));
-				map.put("emp_active", rs.getInt("emp_active"));
+				map.put("emp_active", rs.getString("emp_active"));
 				map.put("grd_name", rs.getString("grd_name"));
 				map.put("grd_no", rs.getInt("grd_no"));
 				employeeList.add(map);
