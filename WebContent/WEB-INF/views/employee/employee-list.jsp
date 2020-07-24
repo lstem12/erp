@@ -13,8 +13,8 @@
 		<th>사원이름</th>
 		<th>입사일</th>
 		<th>월급</th>
-		<th>직책</th>
-		<th>근무상태</th>
+		<th>직급</th>
+		<th>재직여부</th>
 	</tr>
 	<c:if test="${empty employeeList}">
 		<tr>

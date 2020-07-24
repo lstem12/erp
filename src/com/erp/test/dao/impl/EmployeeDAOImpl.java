@@ -22,7 +22,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		try {
 			con = Conn.open();
 			String sql = "insert into employee(emp_no, emp_name, emp_credat, emp_salary, grd_no)\r\n" + 
-					"values(seq_emp_no.nextval, ?, sysdate,?,?)";
+					"values(seq_employee_emp_no.nextval, ?, sysdate,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, employee.get("emp_name").toString());
 			ps.setInt(2, (int) employee.get("emp_salary"));
@@ -49,10 +49,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		int result = 0;
 		try {
 			con = Conn.open();
-			String sql = "update employee set emp_salary=?, grd_name=?, emp_active=? where emp_no=?";
+			String sql = "update employee set emp_salary=?, grd_no=?, emp_active=? where emp_no=?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int) employee.get("emp_salary"));
-			ps.setString(2, employee.get("grd_name").toString());
+			ps.setInt(2, (int) employee.get("grd_no"));
 			ps.setInt(3, (int) employee.get("emp_active"));
 			ps.setInt(4, (int) employee.get("emp_no"));
 			result = ps.executeUpdate();
@@ -101,7 +101,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		
 		try {
 			con = Conn.open();
-			String sql = "select e.emp_no, e.emp_name, e.emp_credat, e.emp_salary, g.grd_name, e.emp_active \r\n" + 
+			String sql = "select e.*, g.grd_name\r\n" + 
 					"from employee e, grade g where e.grd_no=g.grd_no and e.emp_no=? ORDER by e.emp_name";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int) employee.get("emp_no"));
@@ -111,9 +111,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				rMap.put("emp_no", rs.getInt("emp_no"));
 				rMap.put("emp_name", rs.getString("emp_name"));
 				rMap.put("emp_credat", rs.getString("emp_credat"));
-				rMap.put("emp_salary", rs.getString("emp_salary"));
-				rMap.put("emp_active", rs.getString("emp_active"));
+				rMap.put("emp_salary", rs.getInt("emp_salary"));
+				rMap.put("emp_active", rs.getInt("emp_active"));
 				rMap.put("grd_name", rs.getString("grd_name"));
+				rMap.put("grd_no", rs.getInt("grd_no"));
 				return rMap;
 			}
 		}catch(SQLException e) {
@@ -137,7 +138,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		
 		try {
 			con = Conn.open();
-			String sql = "select e.emp_no, e.emp_name, e.emp_credat, e.emp_salary, g.grd_name, e.emp_active \r\n" + 
+			String sql = "select e.*, g.grd_name\r\n" + 
 					"from employee e, grade g where e.grd_no=g.grd_no ORDER by e.emp_name";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -146,9 +147,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				map.put("emp_no", rs.getInt("emp_no"));
 				map.put("emp_name", rs.getString("emp_name"));
 				map.put("emp_credat", rs.getString("emp_credat"));
-				map.put("emp_salary", rs.getString("emp_salary"));
-				map.put("emp_active", rs.getString("emp_active"));
+				map.put("emp_salary", rs.getInt("emp_salary"));
+				map.put("emp_active", rs.getInt("emp_active"));
 				map.put("grd_name", rs.getString("grd_name"));
+				map.put("grd_no", rs.getInt("grd_no"));
 				employeeList.add(map);
 			}
 			return employeeList;

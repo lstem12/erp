@@ -28,7 +28,11 @@
 		</tr>
 		<tr>
 			<th>직급명</th>
-			<td><input type="text" name="grd_name" value="${employee.grd_name}"></td>
+			<td>${employee.grd_name}</td>
+		</tr>
+		<tr>
+			<th>수정직급번호</th>
+			<td><input type="text" name="grd_no" value="${employee.grd_no}"></td>
 		</tr>
 		<tr>
 			<th>근무상태</th>

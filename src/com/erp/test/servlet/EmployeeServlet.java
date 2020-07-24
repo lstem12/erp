@@ -49,18 +49,29 @@ public class EmployeeServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			rd.forward(request, response);
 		}else if("/employee/employee-update".equals(uri)) {
+			int empNo = Integer.parseInt(request.getParameter("emp_no"));
 			int empSalary = Integer.parseInt(request.getParameter("emp_salary"));
-			String grdName = request.getParameter("grd_name");
+			int grdNo = Integer.parseInt(request.getParameter("grd_no"));
 			int empActive = Integer.parseInt(request.getParameter("emp_active"));
 			Map<String, Object> map = new HashMap<>();
+			map.put("emp_no", empNo);
 			map.put("emp_salary", empSalary);
-			map.put("grd_name", grdName);
+			map.put("grd_no", grdNo);
 			map.put("emp_active", empActive);
 			Map<String,Object> rMap = employeeService.updateEmployee(map);
-			rMap.put("url", "/employee/employee-update");
+			rMap.put("url", "/employee/employee-list");
 			request.setAttribute("rMap", rMap);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			rd.forward(request, response);			
+		}else if("/employee/employee-delete".equals(uri)) {
+			int empNo = Integer.parseInt(request.getParameter("emp_no"));
+			Map<String, Object> map = new HashMap<>();
+			map.put("emp_no", empNo);
+			Map<String,Object> rMap = employeeService.deleteEmployee(map);
+			rMap.put("url", "/employee/employee-list");
+			request.setAttribute("rMap", rMap);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			rd.forward(request, response);
 		}
 	}
 
