@@ -139,7 +139,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		try {
 			con = Conn.open();
 			String sql = "select e.emp_no,e.emp_name,e.emp_credat,e.emp_salary, g.grd_name, g.grd_no,\n" + 
-					"DECODE(e.emp_active, 1, '재직중', 0, '-퇴사-', 2, '<휴직중>') as emp_active\n" + 
+					"DECODE(e.emp_active, 0, '-퇴사-', 1, '재직중', 2, '<휴직중>') as emp_active\n" + 
 					"from employee e, grade g \n" + 
 					"where e.grd_no=g.grd_no \n" + 
 					"ORDER by e.emp_name";

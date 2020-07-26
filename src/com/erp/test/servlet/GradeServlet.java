@@ -34,8 +34,7 @@ public class GradeServlet extends HttpServlet {
 			if (grd_no == null || "".equals(grd_no.trim())) {
 				throw new ServletException("나가");
 			}
-			request.setAttribute("grade", gradeService.selectGrade(map));
-			
+			request.setAttribute("grade", gradeService.selectGrade(map));			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/grade/grade-view");
 			rd.forward(request, response);
 			return;
@@ -66,12 +65,13 @@ public class GradeServlet extends HttpServlet {
 			Map<String, Object> rMap = gradeService.updateGrade(grade);
 			rMap.put("url", "/grade/grade-list");
 			request.setAttribute("rMap", rMap);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/common/msg");
 			rd.forward(request, response);
 		}
 		else if ("/grade/grade-delete".equals(uri)) {
 			Map<String, Object> grade = new HashMap<>();
 			grade.put("grd_no", grdNo);
+			gradeService.deleteGrade(grade);
 
 		}
 			

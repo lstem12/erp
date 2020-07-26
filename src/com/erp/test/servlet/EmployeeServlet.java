@@ -61,8 +61,8 @@ public class EmployeeServlet extends HttpServlet {
 			Map<String,Object> rMap = employeeService.updateEmployee(map);
 			rMap.put("url", "/employee/employee-list");
 			request.setAttribute("rMap", rMap);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			rd.forward(request, response);			
+			RequestDispatcher rd1 = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			rd1.forward(request, response);		
 		}else if("/employee/employee-delete".equals(uri)) {
 			int empNo = Integer.parseInt(request.getParameter("emp_no"));
 			Map<String, Object> map = new HashMap<>();
