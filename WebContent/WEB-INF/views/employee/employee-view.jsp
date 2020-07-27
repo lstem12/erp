@@ -32,15 +32,14 @@
 			<th>직급명</th>
 			<td>
 				<select name="grd_no">
-					<c:forEach items="${employeeList}" var="employee">
-						<option value="${employee.grd_no}">${employee.grd_name}</option>
+					<c:forEach items="${gradeList}" var="grade">
+						<c:if test="${employee.grd_no eq grade.grd_no}">
+						<option value="${grade.grd_no}" selected>${grade.grd_name}</option>
+						</c:if>
+						<option value="${grade.grd_no}">${grade.grd_name}</option>
 					</c:forEach>
 				</select>
 			</td>
-		</tr>
-		<tr>
-			<th>수정직급번호</th>
-			<td><input type="text" name="grd_no" value="${employee.grd_no}"></td>
 		</tr>
 		<tr>
 			<th>근무상태</th>

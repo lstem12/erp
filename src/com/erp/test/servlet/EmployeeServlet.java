@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.erp.test.service.EmployeeService;
+import com.erp.test.service.GradeService;
 import com.erp.test.service.impl.EmployeeServiceImpl;
+import com.erp.test.service.impl.GradeServiceImpl;
 
 public class EmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EmployeeService employeeService = new EmployeeServiceImpl();
+	private GradeService gradeService = new GradeServiceImpl();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
+		request.setAttribute("gradeList", gradeService.selectGradeList(null));
 		if("/employee/employee-list".equals(uri)) {
 			request.setAttribute("employeeList", employeeService.selectEmployeeList(null));
 			RequestDispatcher rd = request.getRequestDispatcher("/views/employee/employee-list");
@@ -70,7 +74,7 @@ public class EmployeeServlet extends HttpServlet {
 			Map<String,Object> rMap = employeeService.deleteEmployee(map);
 			rMap.put("url", "/employee/employee-list");
 			request.setAttribute("rMap", rMap);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/common/msg");
 			rd.forward(request, response);
 		}
 	}

@@ -143,7 +143,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 					"DECODE(e.emp_active, 0, '-퇴사-', 1, '재직중', 2, '<휴직중>') as emp_active\n" + 
 					"from employee e, grade g \n" + 
 					"where e.grd_no=g.grd_no \n" + 
-					"ORDER by e.emp_name";
+					"ORDER by e.emp_no";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
