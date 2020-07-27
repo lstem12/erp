@@ -32,7 +32,9 @@
 			<th>직급명</th>
 			<td>
 				<select name="grd_no">
+					<c:forEach items="${employeeList}" var="employee">
 						<option value="${employee.grd_no}">${employee.grd_name}</option>
+					</c:forEach>
 				</select>
 			</td>
 		</tr>
