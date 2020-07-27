@@ -22,7 +22,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		try {
 			con = Conn.open();
 			String sql = "insert into employee(emp_no, emp_name, emp_credat, emp_salary, grd_no)\r\n" + 
-					"values(seq_employee_emp_no.nextval, ?, sysdate,?,?)";
+					"values(seq_emp_no.nextval, ?, sysdate,?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, employee.get("emp_name").toString());
 			ps.setInt(2, (int) employee.get("emp_salary"));
@@ -76,7 +76,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		int result = 0;
 		try {
 			con = Conn.open();
-			String sql = "delete from employee where emp_no=?";
+			String sql = "update employee set emp_active=0 where emp_no=?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int) employee.get("emp_no"));
 			result = ps.executeUpdate();
@@ -102,7 +102,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		try {
 			con = Conn.open();
 			String sql = "select e.*, g.grd_name\r\n" + 
-					"from employee e, grade g where e.grd_no=g.grd_no and e.emp_no=? ORDER by e.emp_name";
+					"from employee e, grade g where e.grd_no=g.grd_no and e.emp_no=? "
+					+ "ORDER by e.emp_name";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int) employee.get("emp_no"));
 			rs = ps.executeQuery();

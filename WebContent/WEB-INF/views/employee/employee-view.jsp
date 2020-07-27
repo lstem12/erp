@@ -30,7 +30,11 @@
 		</tr>
 		<tr>
 			<th>직급명</th>
-			<td>${employee.grd_name}</td>
+			<td>
+				<select name="grd_no">
+						<option value="${employee.grd_no}">${employee.grd_name}</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th>수정직급번호</th>
@@ -45,9 +49,9 @@
 		</tr>
 	</table>
 	</c:if>
-	<c:if test="${employee.emp_active eq 0 }">
+	<c:if test="${employee.emp_active eq 0 || employee.emp_active eq 2}">
 		<script>
-			alert('퇴사한 직원입니다.');
+			alert('퇴사나 휴직중인 직원입니다.');
 			location.href = '/employee/employee-list';
 		</script>
 	</c:if>
