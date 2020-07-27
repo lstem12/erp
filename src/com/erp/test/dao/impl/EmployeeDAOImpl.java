@@ -49,12 +49,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		int result = 0;
 		try {
 			con = Conn.open();
-			String sql = "update employee set emp_salary=?, grd_no=?, emp_active=? where emp_no=?";
+			String sql = "update employee set emp_name=?, emp_salary=?, grd_no=?, emp_active=? where emp_no=?";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, (int) employee.get("emp_salary"));
-			ps.setInt(2, (int) employee.get("grd_no"));
-			ps.setInt(3, (int) employee.get("emp_active"));
-			ps.setInt(4, (int) employee.get("emp_no"));
+			ps.setString(1, employee.get("emp_name").toString());
+			ps.setInt(2, (int) employee.get("emp_salary"));
+			ps.setInt(3, (int) employee.get("grd_no"));
+			ps.setInt(4, (int) employee.get("emp_active"));
+			ps.setInt(5, (int) employee.get("emp_no"));
 			result = ps.executeUpdate();
 			con.commit();
 		}catch(SQLException e) {
@@ -102,8 +103,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		try {
 			con = Conn.open();
 			String sql = "select e.*, g.grd_name\r\n" + 
-					"from employee e, grade g where e.grd_no=g.grd_no and e.emp_no=? "
-					+ "ORDER by e.emp_name";
+					"from employee e, grade g where e.grd_no=g.grd_no and e.emp_no=? ";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, (int) employee.get("emp_no"));
 			rs = ps.executeQuery();

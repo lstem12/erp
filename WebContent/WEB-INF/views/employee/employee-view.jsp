@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<th>사원이름</th>
-			<td>${employee.emp_name}</td>
+			<td><input type="text" name="emp_salary" value="${employee.emp_name}"></td>
 		</tr>
 		<tr>
 			<th>입사일</th>
@@ -33,10 +33,10 @@
 			<td>
 				<select name="grd_no">
 					<c:forEach items="${gradeList}" var="grade">
-						<c:if test="${employee.grd_no eq grade.grd_no}">
-						<option value="${grade.grd_no}" selected>${grade.grd_name}</option>
-						</c:if>
-						<option value="${grade.grd_no}">${grade.grd_name}</option>
+						
+						<option value="${grade.grd_no}" 
+						<c:if test="${employee.grd_no eq grade.grd_no}">selected
+						</c:if>>${grade.grd_name}</option>
 					</c:forEach>
 				</select>
 			</td>

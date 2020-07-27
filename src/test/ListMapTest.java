@@ -60,8 +60,7 @@ public class ListMapTest {
 				}
 			}
 			System.out.println(p);
-		}
-		
+		}		
 		
 	}
 }
