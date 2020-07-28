@@ -26,7 +26,7 @@ public class AddressTest {
 		String keys[] = keyStr.split("\r\n");
 
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\java_study\\address\\build_sejong.txt")), "MS949"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("C:\\build_sejong1.txt")), "MS949"));
 			List<Map<String, String>> list = new ArrayList<>();
 			String str;
 			while ((str = br.readLine()) != null) {
@@ -37,7 +37,7 @@ public class AddressTest {
 				}
 				list.add(map);
 			}
-			long sTime = System.currentTimeMillis();
+
 			String sql = "insert into address (";
 			String value = " values(";
 			for(String key:keys) {
@@ -56,8 +56,6 @@ public class AddressTest {
 				ps.executeUpdate();
 			}
 			con.commit();
-			long eTime = System.currentTimeMillis();
-			System.out.println("실행시간 :" + (eTime-sTime));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
