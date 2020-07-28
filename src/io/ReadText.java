@@ -19,16 +19,21 @@ import com.erp.test.common.Conn;
 public class ReadText {
 
 	public static void readText(String path) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		FileInputStream fis = null;
+		InputStreamReader isr = null;
+		BufferedReader br = null;
 		List<Map<String, String>> list = new ArrayList<>();
-		String f = "C:\\java-study\\address\\" + path;
+		String f = "C:\\java_study\\address\\" + path;
 		String keyStr = "DONG_CODE\r\n" + "SIDO\r\n" + "GUGUN\r\n" + "DONG_NAME\r\n" + "LEE_NAME\r\n" + "IS_MNT\r\n"
 				+ "JIBUN\r\n" + "SUB_JIBUN\r\n" + "ROAD_CODE\r\n" + "ROAD_NAME\r\n" + "IS_BASE\r\n" + "BUILD_NUM\r\n"
 				+ "SUB_BUILD_NUM\r\n" + "BUILDING_NAME\r\n" + "DETAIL_BUILDING_NAME\r\n" + "ADDR_CODE";
 		String keys[] = keyStr.split("\r\n");
 		try {
-			FileInputStream fis = new FileInputStream(f);
-			InputStreamReader isr = new InputStreamReader(fis, "MS949");
-			BufferedReader br = new BufferedReader(isr);
+			fis = new FileInputStream(f);
+			isr = new InputStreamReader(fis, "MS949");
+			br = new BufferedReader(isr);
 			StringBuffer sb = new StringBuffer();
 			String str;
 			while ((str = br.readLine()) != null) {
@@ -48,8 +53,8 @@ public class ReadText {
 			sql = sql.substring(0, sql.length() - 1) + ")";
 			value = value.substring(0, value.length() - 1) + ")";
 			sql += value;
-			Connection con = Conn.open();
-			PreparedStatement ps = con.prepareStatement(sql);
+			con = Conn.open();
+			ps = con.prepareStatement(sql);
 			for (Map<String, String> row : list) {
 				for (int i = 0; i < keys.length; i++) {
 					ps.setString((i + 1), row.get(keys[i]));
@@ -63,13 +68,25 @@ public class ReadText {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				Conn.close(ps, con);
+				if(br !=null) {
+					br.close();
+				}
+				if(isr !=null) {
+					isr.close();
+				}
+				if(fis !=null) {
+					fis.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public static void dbInsert(List<Map<String, String>> addressList) {
-
-	}
 
 }
