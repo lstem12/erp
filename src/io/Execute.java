@@ -16,6 +16,7 @@ public class Execute {
 					//ReadText.dbInsert(addressList);					
 					//List<Map<String,String>> phList = ReadText.parse(str);
 					System.out.println("완료된 파일 :"+file.getName());
+
 				}
 			}
 		}
