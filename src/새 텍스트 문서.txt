@@ -1,0 +1,63 @@
+create table batch_test(
+num number(10,0) not null,
+name varchar2(30) not null
+);
+
+create table address(
+dong_code varchar2(10),
+sido varchar2(80),
+gugun varchar2(80),
+dong_name varchar2(80),
+lee_name varchar2(80),
+is_mnt char(1),
+jibun number(4,0),
+sub_jibun number(4,0),
+road_code varchar2(12),
+road_name varchar2(160),
+is_base char(1),
+build_num number(5,0),
+sub_build_num number(5,0),
+building_name varchar2(150),
+detail_building_name varchar2(200),
+addr_code varchar2(25) not null primary key
+);
+
+create table jibun_address(
+dong_code varchar2(10),
+sido_name varchar2(40),
+gugun_name varchar2(40),
+dong_name varchar2(40),
+lee_name varchar2(40),
+is_mnt char(1),
+jibun_bonbun number(4,0),
+jibun_subbun number(4,0),
+road_code varchar2(12) not null,
+under_check char(1) not null,
+bon_number number(5,0) not null,
+sub_number number(5,0) not null,
+area_number number(10,0) not null,
+primary key(road_code,under_check,bon_number,sub_number,area_number)
+);
+
+
+drop table jibun_address;
+select * from jibun_address;
+delete from address;
+commit;
+select * from address where sido='서울특별시';
+select count(1) from address;
+
+
+create index idx_address_sido on address(sido);
+drop index idx_address_sido;
+select * from address
+where sido = '서울특별시';
+
+select sido,cnt from 
+(select sido,count(1) as cnt 
+from address 
+group by sido)
+where cnt = (select max(cnt) from 
+(select sido,count(1) as cnt 
+from address 
+group by sido));
