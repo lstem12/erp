@@ -175,3 +175,9 @@ public class ReadText {
 }
 
 
+create user test IDENTIFIED by test 
+DEFAULT tablespace jwc;
+
+grant dba to test; 권한
+
+

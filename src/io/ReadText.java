@@ -1,6 +1,7 @@
 package io;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,11 +56,21 @@ public class ReadText {
 			sql += value;
 			con = Conn.open();
 			ps = con.prepareStatement(sql);
+			int cnt=1;
 			for (Map<String, String> row : list) {
 				for (int i = 0; i < keys.length; i++) {
 					ps.setString((i + 1), row.get(keys[i]));
 				}
-				ps.executeUpdate();
+				ps.addBatch();
+				if(cnt%1000==0) {
+					ps.executeBatch();
+					ps.clearBatch();
+				}
+				cnt++;
+			}
+			if(list.size()%1000!=0) {
+				ps.executeBatch();
+				ps.clearBatch();				
 			}
 			con.commit();
 		} catch (FileNotFoundException e) {
@@ -87,6 +98,5 @@ public class ReadText {
 			}
 		}
 	}
-
 
 }

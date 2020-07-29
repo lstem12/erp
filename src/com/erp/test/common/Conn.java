@@ -19,7 +19,7 @@ public class Conn {
 	public static Connection open() {
 		try {
 			Connection con = DriverManager.getConnection
-					("jdbc:oracle:thin:@localhost:1521/xe","c##test","c##test");
+					("jdbc:oracle:thin:@localhost:1521/xe","test","test");
 			con.setAutoCommit(false);
 			return con;
 		} catch (SQLException e) {
