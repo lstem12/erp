@@ -58,7 +58,7 @@ select sido,cnt from
 from address 
 group by sido)
 where cnt = (select max(cnt) from 
-(select sido,count(1) as cnt 
+(select sido,count(1) as cnt  
 from address 
 group by sido));
 
