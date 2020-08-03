@@ -32,5 +32,21 @@ div.sido{
 			<br>
 		</c:if> 
 	</c:forEach>
+	
+	<c:forEach items="${gugunList}" var="gugun" varStatus="idx">
+		<div class="sido" onclick="gugunList(this)" data-gugun="${gugun}">
+			${fn:substring(gugun,0,2)}
+		</div>
+		<c:if test="${idx.count==8}">
+			<br>
+		</c:if>
+</c:forEach>
+
+<script>
+function selectSido(sidoObj){
+	var sido = sidoObj.getAttribute('data-sido');
+	location.href='/test?sido='+ sido;
+}
+</script>
 </body>
 </html>
