@@ -68,3 +68,18 @@ DEFAULT tablespace jwc;
 grant dba to test;
 
 drop user test;
+
+
+
+
+<script>
+var a; //undefined
+a = null; //null
+a = 1.1; //number
+a = 'str'; //string
+a = true; //boolean
+a = function(){ //function 데이터타입
+	console.log('난 이제 함수');
+}
+a = new Number(1) //object
+</script>

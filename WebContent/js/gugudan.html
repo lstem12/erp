@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+function gugudan(){
+	var dan = document.querySelector('#dan').value;
+	var str = '<table border="1">';
+	for(var i=1;i<=9;i++){
+			str += '<tr>';
+		for(var j=1;j<=dan;j++){
+			str += '<td>' +j+'*'+i+'='+i*j+'</td>'
+		}
+		str += '</tr>';
+	}
+	document.querySelector('#rDiv').innerHTML = str;
+}
+
+</script>
+
+단 : <input type="text" id="dan">
+<button onclick="gugudan()">구구단 생성</button>
+
+<div id=rDiv>
+
+</div>
+
+</body>
+</html>
