@@ -3,15 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+div#rDiv{
+	text-align : center;
+	font-size : 40px; 
+	margin-left: 2px;
+	cursor : pointer;
+}
+</style>
 </head>
 <body>
-<script>
-var lottos = [];
-for(var i=1;i<=6;i++){
-	var lotto = Math.floor(Math.random()*45+1);
-	lottos.push(lotto+'');
-}
-document.write(lottos);
-</script>
+	<script>
+		function lotto() {
+			var lottos = [];
+			for (var i = 0; i < 6; i++) {
+				lottos[i] = Math.floor(Math.random() * 45 + 1);
+				for (var j = i - 1; j >= 0; j--) {
+					if (lottos[j] == lottos[i]) {
+						i--;
+					}
+				}
+			}
+		var str = '<table border="1">';
+			str+= '<tr>';
+		for (var i = 0; i < lottos.length; i++) {
+			for (var j = i + 1; j < lottos.length; j++) {
+				if (lottos[i] > lottos[j]) {
+					var tmp = lottos[i];
+					lottos[i] = lottos[j];
+					lottos[j] = tmp;
+				}
+			}
+			if(i%6==0){				
+				str+= '</tr>'
+			}
+			str +='<td>' + lottos[i] + '</td>';
+		}
+
+		str += '</table>';
+		document.querySelector('#rDiv').innerHTML = str;
+	}
+	</script>
+	<button style="height:70px;width:150px;font-size:20px" onclick="lotto()" >로또 번호생성</button>
+	<br>
+
+	<div id=rDiv>
+	
+	</div>
 </body>
 </html>
