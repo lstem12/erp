@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+td{
+	text-align:center;
+	cursor:pointer;
+	width:40px;
+	height:40px;
+}
+td:hover{
+	background-color:gray;
+	color:white;
+	font-weight:bold;
+}
+</style>
+<script src="/js/jquery-3.5.1.js"></script>
+</head>
+<body>
+<input type="number" id="maxNum">
+<button>start</button>
+<div id="rDiv"></div>
+<script>
+function btnClick(){
+	var maxNum = $('#maxNum').val();
+	var html = '<table border="1">';
+	var cnt = 1;
+	for(var i=1;i<=maxNum;i++){
+			html+='<tr>';
+		for(var j=1;j<=maxNum;j++){
+			html+= '<td>' + cnt + '</td>';
+			cnt++;
+		}
+			html+='</tr>';
+	}
+	html+= '</table>';
+	$('#rDiv').html(html);
+	$('td').click(tdClick);
+	function tdClick(){
+		var num = Math.floor(Math.random()*(maxNum*maxNum))+1;
+		if(num==$(this.text())){
+			alert('폭탄');
+		}else{
+			$(this).text('X');
+		}
+		
+		//alert(this.innerText);
+	}
+}
+$('button').click(btnClick);
+
+</script>
+</body>
+</html>

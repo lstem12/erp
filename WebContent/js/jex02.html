@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/jquery-3.5.1.js"></script>
+</head>
+<body>
+<div>노트북 사고싶다.........</div>
+<div id="d1">난 d1</div>
+<input type="text" id="input1">
+
+<script>
+$('#input1').keyup(function(){
+	$('#d1').text(this.value);
+});
+</script>
+</body>
+</html>

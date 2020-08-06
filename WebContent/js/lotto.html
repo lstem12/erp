@@ -39,10 +39,15 @@ div#rDiv{
 			}
 			str +='<td>' + lottos[i] + '</td>';
 		}
-
 		str += '</table>';
 		document.querySelector('#rDiv').innerHTML = str;
 	}
+//if(lottos.indexOf(lotto)!=-1){
+//	i--;
+//	continue;
+//}
+//	lottos.push(lotto);
+//	lottos.sort();
 	</script>
 	<button style="height:70px;width:150px;font-size:20px" onclick="lotto()" >로또 번호생성</button>
 	<br>
