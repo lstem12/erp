@@ -1,0 +1,9 @@
+ddl - CREATE, ALTER, DROP 
+사용자 관련 : GRANT, REVOKE
+데이터 관련된거 빼고 전부다
+VIEW, INDEX, 
+dml - select , delete, update, insert
+option - all, distinct
+colums - 컬럼명, * 
+tcl - COMMIT, ROLLBACK, CHECKPOINT(안씀)
+
