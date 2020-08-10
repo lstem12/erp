@@ -7,3 +7,25 @@ option - all, distinct
 colums - 컬럼명, * 
 tcl - COMMIT, ROLLBACK, CHECKPOINT(안씀)
 
+
+
+create table employee(
+emp_no number(10,0) not null,
+emp_name varchar2(100) not null,
+emp_credat date not null,
+emp_salary number(10,0) not null,
+grd_no char(1) not null,
+primary key(emp_no)
+);
+
+select grd_no,count(1) from employee 
+where EMP_SALARY in
+(select min(EMP_SALARY) from employee)
+group by grd_no
+;
+alter table employee add etc2 varchar2(200) after etc;
+create index idx_emp_salary_employee on employee(emp_salary);
+alter index idx_emp_salary_employee rename to idx_emp_salary;
+select * from user_indexes;
+
+alter table employee drop column etc;
