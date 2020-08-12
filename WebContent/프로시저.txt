@@ -96,6 +96,18 @@ end;
 
 
 
+CREATE OR REPLACE procedure prd_loop(p_max_num number)
+IS
+	v_sum number := 0;
+	v_idx number := 0;
+BEGIN
+	for v_idx in 1..p_max_num loop
+		v_sum := v_sum + v_idx;
+	end loop;
+		dbms_output.put_line(v_sum);
+end;
+
+
 
 
 create or REPLACE procedure prd_sido_insert_cnt
