@@ -110,6 +110,25 @@ end;
 
 
 
+create or replace procedure prd_incress_sal(p_emp_no number, p_rate number)
+IS
+	v_sal number :=0;
+begin
+	select SAL
+	into v_sal
+	from emp where empno=p_emp_no;
+	v_sal := v_sal * p_rate;
+	
+	update EMP
+	set sal = v_sal
+	where empno=p_emp_no;
+end;
+
+
+
+
+
+
 create or REPLACE procedure prd_sido_insert_cnt
 Is
 	CURSOR cur_address
